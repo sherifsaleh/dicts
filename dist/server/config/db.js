@@ -1,6 +1,7 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var config = {
     url: 'mongodb://localhost:27017/test'
 };
-exports.__esModule = true;
-exports["default"] = config;
+exports.default = config;
+//# sourceMappingURL=db.js.map

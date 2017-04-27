@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { DataService } from './services/data.service';
+import { DictDetailsComponent } from './dict-details/dict-details.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    DictDetailsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     AppRoutingModule,

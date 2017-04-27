@@ -24,7 +24,7 @@
       </tbody>
       <tbody *ngIf="!isEditing">
         <tr *ngFor="let dict of dicts">
-          <td>{{dict.name}}</td>
+          <td><a [routerLink]="[ 'dict/', dict._id]"> {{dict.name}}</a></td>
           <td>
             <button class="btn btn-sm btn-warning" (click)="enableEditing(dict)"><i class="fa fa-pencil"></i> Edit</button>            <button class="btn btn-sm btn-danger" (click)="deleteDict(dict)"><i class="fa fa-trash"></i> Delete</button>
           </td>

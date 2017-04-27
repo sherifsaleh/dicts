@@ -1,8 +1,10 @@
 "use strict";
-var mongoose = require('mongoose');
+Object.defineProperty(exports, "__esModule", { value: true });
+var mongoose = require("mongoose");
 var dictSchema = new mongoose.Schema({
-    name: String
+    name: String,
+    dictSchema: [{ values: String }]
 });
 var Dict = mongoose.model('Dict', dictSchema);
-exports.__esModule = true;
-exports["default"] = Dict;
+exports.default = Dict;
+//# sourceMappingURL=dict.model.js.map
