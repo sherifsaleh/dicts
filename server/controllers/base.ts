@@ -4,7 +4,7 @@ abstract class BaseCtrl {
 
   // Get all
   getAll = (req, res) => {
-    this.model.find({}, (err, docs) => {
+    this.model.find({}, null, { sort: { date: -1 } }, (err, docs) => {
       if (err) { return console.error(err); }
       res.json(docs);
     });

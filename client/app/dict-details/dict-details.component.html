@@ -1,3 +1,16 @@
-<p>
-  dict-details works!
-</p>
+<article *ngIf="dict;else nodict" class="container text-center my-4">
+  <h2>{{dict.name}}</h2>
+  <div><label>id: </label>{{dict._id}}</div>
+  <button (click)="goBack()" class="btn btn-primary">Back</button>
+</article>
+
+<ng-template #nodict>
+  <main class="container text-center my-4">
+    <h1>404</h1>
+    <p>
+      The dict or the page you are looiking for is not found!!!
+    </p>
+    <a routerLink="/" class="nav-link" class="btn btn-primary">Please check our dicts list here</a>
+  </main>
+
+</ng-template>

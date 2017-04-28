@@ -5,7 +5,7 @@ var BaseCtrl = (function () {
         var _this = this;
         // Get all
         this.getAll = function (req, res) {
-            _this.model.find({}, function (err, docs) {
+            _this.model.find({}, null, { sort: { date: -1 } }, function (err, docs) {
                 if (err) {
                     return console.error(err);
                 }

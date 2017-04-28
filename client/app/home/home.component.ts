@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 import { DataService } from '../services/data.service';
 import { ToastComponent } from '../shared/toast/toast.component';
@@ -11,7 +12,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  pageTitle = 'Colors dictionaries';
   dicts = [];
   isLoading = true;
 
@@ -20,20 +21,26 @@ export class HomeComponent implements OnInit {
 
   addDictForm: FormGroup;
   name = new FormControl('', Validators.required);
+  description = new FormControl('', Validators.required);
 
 
 
   constructor(private http: Http,
     private dataService: DataService,
     public toast: ToastComponent,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private titleService: Title
+  ) { }
 
   ngOnInit() {
     this.getDicts();
 
     this.addDictForm = this.formBuilder.group({
-      name: this.name
+      name: this.name,
+      description: this.description
     });
+
+    this.setTitle(this.pageTitle);
   }
 
   getDicts() {
@@ -51,6 +58,9 @@ export class HomeComponent implements OnInit {
         this.dicts.push(newDict);
         this.addDictForm.reset();
         this.toast.setMessage('item added successfully.', 'success');
+        // reload the dicts to reset the editing
+        this.getDicts();
+
       },
       error => console.log(error)
     );
@@ -91,6 +101,10 @@ export class HomeComponent implements OnInit {
         error => console.log(error)
       );
     }
+  }
+
+  setTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle);
   }
 
 }

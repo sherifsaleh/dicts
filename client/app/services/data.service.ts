@@ -24,8 +24,8 @@ export class DataService {
     return this.http.post('/api/dict', JSON.stringify(dict), this.options);
   }
 
-  getDict(dict): Observable<any> {
-    return this.http.get(`/api/dict/${dict._id}`, this.options);
+  getDict(dictId): Observable<any> {
+    return this.http.get(`/api/dict/${dictId}`, this.options);
   }
 
   editDict(dict): Observable<any> {

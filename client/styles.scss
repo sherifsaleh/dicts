@@ -1,4 +1,139 @@
+/***************** import *****************/
+
 @import '/assets/scss/bootstrap';
+@mixin gradient($from, $to) {
+  /* fallback/image non-cover color */
+  background: $from; /* Old browsers */
+  background: -moz-linear-gradient(45deg, $from 50%, $to 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg, $from 50%,$to 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, $from 50%,$to 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+
+
+/***************** global *****************/
+
 body {
   margin-bottom: 10px;
 }
+
+/***************** buttons *****************/
+
+// Remove all backgrounds
+.btn-white {
+  background-color: $white;
+  border: 0;
+  color: $gray-light;//
+  color: rgba(#000, .3);
+  @extend .px-4;
+  border-radius: 50px;
+  transition:  all ease 250ms;
+  cursor: pointer;
+
+  &:hover, &:focus, &:active {
+    box-shadow: 0 5px  10px 0 rgba(#000, .2);
+  }
+}
+.btn-hover-danger {
+  &:hover, &:focus, &:active {
+    color: $white;
+    @extend .bg-g-pink;
+    i {
+      color: $white !important;
+    }
+  }
+}
+
+.btn-hover-warning {
+  &:hover, &:focus, &:active {
+    color: $white;
+    @extend .bg-g-orange;
+    i {
+      color: $white !important;
+    }
+  }
+}
+
+.btn-primary--alt {
+  box-shadow: 0 5px  10px 0 rgba(#000, .2);
+  border-radius: 50px;
+  background-color: $white;
+  transition:  all ease 250ms;
+  @extend .px-4;
+  cursor: pointer;
+
+    &:hover, &:focus, &:active {
+      //@extend .bg-g-blue;
+      color: $white;
+      @extend .bg-g-purple;
+      i {
+        color: $white !important;
+      }
+  }
+}
+
+.form-control {
+  border-radius: 50px;
+  @extend .px-4;
+  background-color: $gray-lighter;
+  border: 0;
+  &:focus {
+    border: 1px solid $purple;
+  }
+  //box-shadow: 0 5px  10px 0 rgba(#000, .1);
+}
+/***************** nav *****************/
+
+.nav-left {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+
+// .navbar-brand {
+//   @include gradient($red, #f45c43);
+//   -webkit-background-clip: text;
+//   -webkit-text-fill-color: transparent;
+// }
+
+/***************** cards *****************/
+
+.dict:nth-child(4n+1)  .card--dictionary{
+  @extend .bg-g-blue;
+}
+.dict:nth-child(4n+2)  .card--dictionary{
+  @extend .bg-g-purple;
+}
+.dict:nth-child(4n+3)  .card--dictionary{
+  @extend .bg-g-red;
+}
+.dict:nth-child(4n+4)  .card--dictionary{
+  @extend .bg-g-pink;
+}
+.card--dictionary {
+  min-height: 150px;
+  border:0;
+  box-shadow: 0 5px  10px 0 rgba(#000, .2);
+}
+.card--dictionary__footer {
+  width: 90%;
+
+  @extend .py-3;
+  @extend .px-4;
+  @extend .bg-white;
+  @extend .mx-auto;
+  @extend .text-right;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: 0 5px  10px 0 rgba(#000, .1);
+
+}
+
+/***************** media queries *****************/
+
+@import '/assets/scss/media-queries';
+
+/***************** helpers *****************/
+
+@import '/assets/scss/helpers';

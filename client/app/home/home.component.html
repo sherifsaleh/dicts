@@ -7,54 +7,42 @@
 
 <app-toast [message]="toast.message"></app-toast>
 
-<div class="card" *ngIf="!isLoading">
-  <h4 class="card-header">Current dicts ({{dicts.length}})</h4>
-  <div class="card-block">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-default">
-        <tr>
-          <th>Name</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody *ngIf="dicts.length === 0">
-        <tr>
-          <td colspan="4">There are no dicts in the DB. Add a new Dict below.</td>
-        </tr>
-      </tbody>
-      <tbody *ngIf="!isEditing">
-        <tr *ngFor="let dict of dicts">
-          <td><a [routerLink]="[ 'dict/', dict._id]"> {{dict.name}}</a></td>
-          <td>
-            <button class="btn btn-sm btn-warning" (click)="enableEditing(dict)"><i class="fa fa-pencil"></i> Edit</button>            <button class="btn btn-sm btn-danger" (click)="deleteDict(dict)"><i class="fa fa-trash"></i> Delete</button>
-          </td>
-        </tr>
-      </tbody>
-      <tbody *ngIf="isEditing">
-        <tr>
-          <td colspan="4">
-            <form class="form-inline" #form="ngForm" (ngSubmit)="editDict(dict)" style="display:inline">
-              <div class="form-group">
-                <input class="form-control" type="text" name="name" [(ngModel)]="dict.name" placeholder="Name" required>
-              </div>
-              <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Save</button>
-            </form>
-            <button class="btn btn-sm btn-warning" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="card" *ngIf="!isEditing">
-  <h4 class="card-header">Add new Dict</h4>
-  <div class="card-block">
-    <form class="form-inline" [formGroup]="addDictForm" (ngSubmit)="addDict()" style="text-align:center">
-      <div class="form-group">
-        <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">
-      </div>
-      <button class="btn btn-primary" type="submit" [disabled]="!addDictForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
+<div *ngIf="!isLoading">
+  <section class="text-center">
+    <h1 class="jumbotron-heading">Current Dictionaries ({{dicts.length}})</h1>
+    <p class="lead text-muted">The application is targeting to mange colors dictionaries assuming that a collection is one column.</p>
+    <form class="form-inline mt-4 text-center d-block" [formGroup]="addDictForm" (ngSubmit)="addDict()" *ngIf="!isEditing">
+      <legend>Add new Dictionary</legend>
+      <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="name" formControlName="name" placeholder="Name">
+      <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="description" formControlName="description" placeholder="Description">
+      <button class="btn btn-primary--alt" type="submit" [disabled]="!addDictForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
     </form>
-  </div>
+  </section>
+  <section *ngIf="dicts.length === 0">
+    <p>There are no dicts in the DB. Add a new Dict below.</p>
+  </section>
+  <section *ngIf="!isEditing">
+    <article *ngFor="let dict of dicts" class="my-5 dict">
+      <div class="card card-inverse card--dictionary">
+        <div class="card-block">
+          <h3 class="card-title h1"><a [routerLink]="[ 'dict/', dict._id]" class="text-white"> {{dict.name}}</a></h3>
+          <p class="card-text">{{dict.description}}</p>
+        </div>
+      </div>
+      <footer class="card--dictionary__footer">
+        <button class="btn btn-sm btn-white btn-hover-warning" (click)="enableEditing(dict)"><i class="fa fa-pencil text-warning"></i> Edit</button>
+        <button class="btn btn-sm btn-white btn-hover-danger" (click)="deleteDict(dict)"><i class="fa fa-trash text-danger"></i> Delete</button>
+      </footer>
+    </article>
+
+
+  </section>
+  <section *ngIf="isEditing">
+    <form class="form-inline" #form="ngForm" (ngSubmit)="editDict(dict)" style="display:inline">
+      <div class="form-group">
+        <input class="form-control" type="text" name="name" [(ngModel)]="dict.name" placeholder="Name" required>
+      </div>
+      <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Save</button>
+    </form>
+  </section>
 </div>

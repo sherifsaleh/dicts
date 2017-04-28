@@ -1,0 +1,20 @@
+.bg-g-red {
+  @include gradient($red, #f45c43);
+}
+.bg-g-purple {
+  @include gradient($blue2, $purple);
+}
+
+.bg-g-blue {
+  @include gradient($teal, lighten($teal, 20%));
+}
+
+.bg-g-pink {
+  @include gradient($pink, $yellow);
+}
+.bg-g-orange {
+  @include gradient($orange, $yellow);
+}
+.bg-white {
+  background-color: #fff;
+}

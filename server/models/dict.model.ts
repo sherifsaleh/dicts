@@ -2,7 +2,8 @@ import * as mongoose from 'mongoose';
 
 const dictSchema = new mongoose.Schema({
   name: String,
-  dictSchema: [{ values: String }]
+  description: String,
+  date: { type: Date, default: Date.now }
 });
 
 const Dict = mongoose.model('Dict', dictSchema);

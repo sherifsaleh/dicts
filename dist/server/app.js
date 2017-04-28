@@ -25,7 +25,7 @@ db.once('open', function () {
         res.sendFile(path.join(__dirname, '../public/index.html'));
     });
     app.listen(app.get('port'), function () {
-        console.log('Angular 2 Full Stack listening on port ' + app.get('port'));
+        console.log('Angular 4 Full Stack listening on port ' + app.get('port'));
     });
 });
 //# sourceMappingURL=app.js.map
