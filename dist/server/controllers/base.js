@@ -40,6 +40,14 @@ var BaseCtrl = (function () {
                 res.json(obj);
             });
         };
+        this.getSchemas = function (req, res) {
+            _this.model.find({}, null, { sort: { date: -1 } }, function (err, docs) {
+                if (err) {
+                    return console.error(err);
+                }
+                res.json(docs);
+            });
+        };
         // Update by id
         this.update = function (req, res) {
             _this.model.findOneAndUpdate({ _id: req.params.id }, req.body, function (err) {

@@ -39,8 +39,16 @@
                 <input class="form-control form-control-lg" type="text" name="name" [(ngModel)]="dict.name" placeholder="Name" required>
               </div>
               <div class="form-group">
-                <label for="name">Dictionary Description: </label>
+                <label for="description">Dictionary Description: </label>
                 <textarea class="form-control" rows="3" name="description" [(ngModel)]="dict.description" placeholder="Description" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="schema" title="Match your dictionary's domains to dictionary's ranges">Choose a schema:<sup class="text-muted"><i class="fa fa-info-circle"></i>  Match dictionary's domains to dictionary's ranges.</sup>
+                  </label>
+                <select class="form-control">
+                  <option *ngFor="let schema of schemas" [value]="schema.value">{{schema.name}}</option>
+                </select>
               </div>
             </header>
             <div class="card  card--dictionary">

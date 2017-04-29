@@ -17,6 +17,12 @@ export class DictEditComponent implements OnInit {
   isEditing = true;
   dicts = [];
 
+  schemas = [
+    { name: 'basic' },
+    { name: 'x11' },
+    { name: 'Ral' }
+  ]
+
 
   constructor(
     private dataService: DataService,

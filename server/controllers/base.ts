@@ -35,6 +35,15 @@ abstract class BaseCtrl {
     });
   };
 
+  getSchemas = (req, res) => {
+    this.model.find({}, null, { sort: { date: -1 } }, (err, docs) => {
+      if (err) { return console.error(err); }
+      res.json(docs);
+    });
+  };
+
+
+
   // Update by id
   update = (req, res) => {
     this.model.findOneAndUpdate({ _id: req.params.id }, req.body, (err) => {
