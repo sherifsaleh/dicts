@@ -4,6 +4,9 @@ var mongoose = require("mongoose");
 var dictSchema = new mongoose.Schema({
     name: String,
     description: String,
+    dictSchema: [],
+    schemaMatching: String,
+    state: String,
     date: { type: Date, default: Date.now }
 });
 var Dict = mongoose.model('Dict', dictSchema);

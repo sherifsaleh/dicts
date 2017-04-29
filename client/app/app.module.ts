@@ -8,6 +8,8 @@ import { AboutComponent } from './about/about.component';
 import { DataService } from './services/data.service';
 import { DictDetailsComponent } from './dict-details/dict-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { DictAddComponent } from './dict-add/dict-add.component';
+import { DictEditComponent } from './dict-edit/dict-edit.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HomeComponent,
     AboutComponent,
     DictDetailsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DictAddComponent,
+    DictEditComponent
   ],
   imports: [
     AppRoutingModule,

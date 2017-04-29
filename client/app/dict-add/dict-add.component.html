@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-lg-10 py-5">
+    <div class="glowworm-holder" *ngIf="isLoading">
+      <div class="glowworm-loader">
+        <div class="glowworm-motion">
+          <div class="glowworm-container">
+            <div class="glowworm-left"></div>
+            <div class="glowworm-right"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-toast [message]="toast.message"></app-toast>
+
+    <div *ngIf="!isLoading">
+      <section class="text-center">
+        <h1>Add new Dictionary</h1>
+        <p class="lead text-muted">The application is targeting to mange colors dictionaries assuming that a collection is one column.</p>
+        <form class="mt-4 text-center d-block" [formGroup]="addDictForm" (ngSubmit)="reqSend($event)" *ngIf="!isEditing">
+          <div class="form-group">
+            <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="text" name="description" formControlName="description" placeholder="Description">
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" rows="3" formControlName="dictSchema" name="dictSchema" placeholder="Colors: stone gray, red, yellow ...   so on"></textarea>
+          </div>
+
+          <button class="btn btn-primary--alt" type="submit" [disabled]="!addDictForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>

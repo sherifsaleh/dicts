@@ -1,48 +1,62 @@
-<div class="card" *ngIf="isLoading">
-  <h4 class="card-header">Loading...</h4>
-  <div class="card-block text-xs-center">
-    <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
-  </div>
-</div>
-
-<app-toast [message]="toast.message"></app-toast>
-
-<div *ngIf="!isLoading">
-  <section class="text-center">
-    <h1 class="jumbotron-heading">Current Dictionaries ({{dicts.length}})</h1>
-    <p class="lead text-muted">The application is targeting to mange colors dictionaries assuming that a collection is one column.</p>
-    <form class="form-inline mt-4 text-center d-block" [formGroup]="addDictForm" (ngSubmit)="addDict()" *ngIf="!isEditing">
-      <legend>Add new Dictionary</legend>
-      <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="name" formControlName="name" placeholder="Name">
-      <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" name="description" formControlName="description" placeholder="Description">
-      <button class="btn btn-primary--alt" type="submit" [disabled]="!addDictForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
-    </form>
-  </section>
-  <section *ngIf="dicts.length === 0">
-    <p>There are no dicts in the DB. Add a new Dict below.</p>
-  </section>
-  <section *ngIf="!isEditing">
-    <article *ngFor="let dict of dicts" class="my-5 dict">
-      <div class="card card-inverse card--dictionary">
-        <div class="card-block">
-          <h3 class="card-title h1"><a [routerLink]="[ 'dict/', dict._id]" class="text-white"> {{dict.name}}</a></h3>
-          <p class="card-text">{{dict.description}}</p>
+<div class="row justify-content-center">
+  <div class="col-lg-10 py-5">
+    <div class="glowworm-holder" *ngIf="isLoading">
+      <div class="glowworm-loader">
+        <div class="glowworm-motion">
+          <div class="glowworm-container">
+            <div class="glowworm-left"></div>
+            <div class="glowworm-right"></div>
+          </div>
         </div>
       </div>
-      <footer class="card--dictionary__footer">
-        <button class="btn btn-sm btn-white btn-hover-warning" (click)="enableEditing(dict)"><i class="fa fa-pencil text-warning"></i> Edit</button>
-        <button class="btn btn-sm btn-white btn-hover-danger" (click)="deleteDict(dict)"><i class="fa fa-trash text-danger"></i> Delete</button>
-      </footer>
-    </article>
+    </div>
 
+    <app-toast [message]="toast.message"></app-toast>
 
-  </section>
-  <section *ngIf="isEditing">
-    <form class="form-inline" #form="ngForm" (ngSubmit)="editDict(dict)" style="display:inline">
-      <div class="form-group">
-        <input class="form-control" type="text" name="name" [(ngModel)]="dict.name" placeholder="Name" required>
-      </div>
-      <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Save</button>
-    </form>
-  </section>
+    <div *ngIf="!isLoading">
+      <section class="text-center">
+        <h1>Current Dictionaries ({{dicts.length}})</h1>
+        <p class="lead text-muted">The application is targeting to mange colors dictionaries assuming that a collection is one column.</p>
+        <a routerLink="/add" routerLinkActive="active" class="btn btn-primary--alt">
+          <i class="fa fa-plus-circle"></i> Add new dictionary
+        </a>
+      </section>
+      <section *ngIf="dicts.length === 0">
+        <p>There are no dicts in the DB. Add a new Dict below.</p>
+      </section>
+      <section>
+        <div class="container-fluid">
+          <div class="row">
+            <article *ngFor="let dict of dicts" class="my-4 dict col-lg-6">
+              <div class="card card-inverse card--dictionary">
+                <div class="card-block">
+                  <h3 class="card-title h1"><a [routerLink]="[ 'dict/', dict._id]" class="text-white"> {{dict.name}}</a></h3>
+                  <p class="card-text">{{dict.description}}</p>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>domain</th>
+                        <th>range</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let domain of dict.dictSchema">
+                        <td>{{domain.source}}</td>
+                        <td>{{domain.target}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <footer class="card--dictionary__footer">
+                <a class="btn btn-sm btn-white btn-hover-warning" [routerLink]="[ 'edit/', dict._id]"><i class="fa fa-pencil text-warning"></i> Edit</a>
+
+                <button class="btn btn-sm btn-white btn-hover-danger" (click)="deleteDict(dict)"><i class="fa fa-trash text-danger"></i> Delete</button>
+              </footer>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
 </div>

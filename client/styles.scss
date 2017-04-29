@@ -13,13 +13,9 @@
 
 /***************** global *****************/
 
-body {
-  margin-bottom: 10px;
-}
 
 /***************** buttons *****************/
 
-// Remove all backgrounds
 .btn-white {
   background-color: $white;
   border: 0;
@@ -34,9 +30,27 @@ body {
     box-shadow: 0 5px  10px 0 rgba(#000, .2);
   }
 }
+
+.btn-text {
+  background-color: transparent;
+  border: 0;
+  color: $gray-light;//
+  color: rgba(#000, .3);
+  @extend .px-4;
+  border-radius: 50px;
+  transition:  all ease 250ms;
+  cursor: pointer;
+
+  &:hover, &:focus, &:active {
+    box-shadow: 0 5px  10px 0 rgba(#000, .2);
+  }
+
+}
 .btn-hover-danger {
   &:hover, &:focus, &:active {
     color: $white;
+    box-shadow: 0 5px  10px 0 rgba(#000, .2);
+
     @extend .bg-g-pink;
     i {
       color: $white !important;
@@ -47,7 +61,21 @@ body {
 .btn-hover-warning {
   &:hover, &:focus, &:active {
     color: $white;
+    box-shadow: 0 5px  10px 0 rgba(#000, .2);
+
     @extend .bg-g-orange;
+    i {
+      color: $white !important;
+    }
+  }
+}
+
+.btn-hover-info {
+  &:hover, &:focus, &:active {
+    color: $white;
+    box-shadow: 0 5px  10px 0 rgba(#000, .2);
+
+    @extend .bg-g-blue;
     i {
       color: $white !important;
     }
@@ -63,7 +91,8 @@ body {
   cursor: pointer;
 
     &:hover, &:focus, &:active {
-      //@extend .bg-g-blue;
+    box-shadow: 0 5px  10px 0 rgba(#000, .2);
+
       color: $white;
       @extend .bg-g-purple;
       i {
@@ -71,16 +100,18 @@ body {
       }
   }
 }
-
+/***************** forms *****************/
 .form-control {
-  border-radius: 50px;
   @extend .px-4;
   background-color: $gray-lighter;
   border: 0;
+
   &:focus {
     border: 1px solid $purple;
   }
-  //box-shadow: 0 5px  10px 0 rgba(#000, .1);
+}
+input[type='text'].form-control{
+  border-radius: 50px;
 }
 /***************** nav *****************/
 
@@ -89,15 +120,48 @@ body {
   left: 0;
   top: 0;
   height: 100%;
+  padding-top: 20%;
+  @extend .px-0;
+  box-shadow: 0 5px  10px 0 rgba(#000, .1);
+
+
+
+
+  // li:nth-child(4n+1) .nav__link{
+  //   background-color: darken($white, 1%);
+  // }
+  // li:nth-child(4n+2) .nav__link{
+  //   background-color: darken($white, 2%);
+  // }
+  // li:nth-child(4n+3) .nav__link{
+  //   background-color: darken($white, 3%);
+  // }
 }
 
-// .navbar-brand {
-//   @include gradient($red, #f45c43);
-//   -webkit-background-clip: text;
-//   -webkit-text-fill-color: transparent;
-// }
+.nav__link {
+  color : $gray-light;
+  @extend .py-2;
+  display: block;
+  transition:  all ease 250ms;
 
+  font-size: 14px;
+
+  &:hover, &:active, &:focus, &.active {
+    //@extend .bg-g-red;
+    color: $red;
+    //color: $white;
+    text-decoration: none;
+  }
+}
 /***************** cards *****************/
+
+.card--no-style {
+  background-color: transparent;
+  border: 0;
+  > .card {
+    margin-bottom: 0;
+  }
+}
 
 .dict:nth-child(4n+1)  .card--dictionary{
   @extend .bg-g-blue;

@@ -14,6 +14,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
 export class DictDetailsComponent implements OnInit {
   dict: any;
 
+
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
@@ -27,10 +28,10 @@ export class DictDetailsComponent implements OnInit {
         return this.dataService.getDict(params['id']);
       })
       .subscribe((dict) => {
-        let catParse = JSON.parse(dict._body);
-        let pageTitle = catParse.name;
+        let dictParse = JSON.parse(dict._body);
+        let pageTitle = dictParse.name;
         this.setTitle(pageTitle);
-        return this.dict = catParse;
+        return this.dict = dictParse;
       });
   }
 
@@ -41,7 +42,4 @@ export class DictDetailsComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
-
-
 }

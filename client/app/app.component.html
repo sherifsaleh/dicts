@@ -1,28 +1,25 @@
 <main class="container-fluid">
   <div class="row justify-content-center">
-    <nav class="col-1 bg-white">
-      <ul class="list-unstyled text-center">
+    <nav class="col-2 bg-white nav-left">
+      <ul class="list-unstyled text-center ">
         <li>
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><i class="fa fa-book" aria-hidden="true"></i></a>
-        </li>
-        <li>
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-            <i class="fa fa-home"></i> <span class="sr-only">Home</span>
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav__link">
+            <i class="fa fa-home"></i> <span class="hidden-md-down">HOME</span>
           </a>
         </li>
         <li>
-          <a routerLink="/about" routerLinkActive="active">
-            <i class="fa fa-info-circle"></i> <span class="sr-only">about</span>
+          <a routerLink="/about" routerLinkActive="active" class="nav__link">
+            <i class="fa fa-info-circle"></i> <span class="hidden-md-down">ABOUT</span>
           </a>
         </li>
+
+        <a routerLink="/add" routerLinkActive="active" class="btn btn-primary--alt mt-2">
+          <i class="fa fa-plus-circle"></i> <span class="hidden-md-down">ADD</span>
+        </a>
       </ul>
     </nav>
-    <div class="col-11">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 py-5">
-          <router-outlet></router-outlet>
-        </div>
-      </div>
+    <div class="col-9 offset-2">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </main>
