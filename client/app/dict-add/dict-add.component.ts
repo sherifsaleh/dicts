@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { DataService } from '../services/data.service';
 import { ToastComponent } from '../shared/toast/toast.component';
@@ -22,22 +23,49 @@ export class DictAddComponent implements OnInit {
   dictSchema = new FormControl('', Validators.required);
   schemaMatching = new FormControl('', Validators.required);
 
-  schemas = [];
+  schemas = ['Other'];
   schemaCodingLang = [
     {
       'source': 'py',
       'target': 'Python'
     },
     {
+      'source': 'xhtml',
+      'target': 'HTML'
+
+    },
+    {
+      'source': 'html5',
+      'target': 'HTML'
+
+    },
+    {
       'source': 'htm',
       'target': 'HTML'
+
+    },
+    {
+      'source': 'html',
+      'target': 'HTML'
+
     },
     {
       'source': 'js',
       'target': 'javaScript'
+
+    },
+    {
+      'source': 'javaScript',
+      'target': 'javaScript'
+
     },
     {
       'source': '$',
+      'target': 'jQuery'
+
+    },
+    {
+      'source': 'jquery',
       'target': 'jQuery'
     }
   ]
@@ -48,11 +76,13 @@ export class DictAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     public toast: ToastComponent,
     private dataService: DataService,
-    private titleService: Title
+    private titleService: Title,
+    private router: Router
 
   ) { }
 
   ngOnInit() {
+
     this.addDictForm = this.formBuilder.group({
       name: this.name,
       description: this.description,
@@ -72,7 +102,8 @@ export class DictAddComponent implements OnInit {
         const newDict = res.json();
         this.dicts.push(newDict);
         this.addDictForm.reset();
-        this.toast.setMessage('Dictionary added successfully.', 'success');
+        this.toast.setMessage('Dictionary added successfully. Please complete the following...', 'success');
+        this.router.navigate(['/edit', newDict._id]);
       },
       error => console.log(error)
     );
@@ -94,32 +125,59 @@ export class DictAddComponent implements OnInit {
     e.preventDefault();
     let dictNew = this.addDictForm.value;
     let dataSource = dictNew.dictSchema;
-    let proceeded = dataSource.trim().replace(/(\r\n|\n|\r)/gm, '').replace(/[\s,]+/g, ',').split('\,').filter((x) => x != '');
-    // match
+    let proceeded = this.dataClean(dataSource);
+    // match to schema
+    this.filterFn(proceeded, 'test');
 
-    proceeded.map((key) => {
-      this.schemaCodingLang.filter((x, index) => {
-        if (key == x.source) {
-          this.dictNewSchema.push({ 'source': key, 'target': x.target });
-        } else if (key == x.target) {
-          this.dictNewSchema.push({ key, 'target': x.target });
-        }
-      });
-    });
+    // if no schema defined assigne the dictionary name as new schema
+    if (dictNew.schemaMatching === 'Other') { dictNew.schemaMatching = dictNew.name };
+
     dictNew.dictSchema = this.dictNewSchema;
+    console.log(dictNew.schemaMatching);
 
     this.addDict(dictNew);
   }
 
-
-  filterFn(key, schema) {
-    return schema.filter((x, index) => {
-      if (key == x.source) {
-        return { 'source': key, 'target': x.target };
-      } else if (key == x.target) {
-        return { key, 'target': x.target };
-      }
+  dataClean(data) {
+    // trim remove all space, dashes, convert to lowercases, spilt with comma
+    let trimed = data.trim().replace(/(\r\n|\n|\r|\s|-)/gm, '').toLowerCase().split('\,').filter((x) => x != '');
+    // remove duplicates
+    let uniqueArray = trimed.filter(function (item, pos) {
+      return trimed.indexOf(item) == pos;
     });
+
+    return uniqueArray;
+  }
+
+
+  filterFn(data, schema) {
+    let keys = [];
+    let build = data.map((key) => {
+      this.schemaCodingLang.filter((x, index) => {
+        if (key == x.source) {
+          keys.push({ 'count': 1, 'state': 'match', 'source': key, 'target': x.target });
+        }
+      })
+    });
+
+    let countedKeys = keys
+      .reduce((a, b) => {
+        a[b.target] = (a[b.target] || 0) + b.count;
+        return a
+      }, []);
+
+
+    let duplicatesValues = Object.keys(countedKeys).filter((a) => countedKeys[a] > 1);
+    let readyKeys = keys.map((x) => {
+      duplicatesValues.filter((repatedName) => {
+        if (x.target === repatedName) {
+          x.count = 2; return x;
+        }
+      });
+      return x
+    });
+
+    this.dictNewSchema = readyKeys;
   }
 
   setTitle(newTitle: string) {

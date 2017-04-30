@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import { DataService } from '../services/data.service';
@@ -24,9 +24,10 @@ export class DictEditComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
+    private router: Router,
     private location: Location,
     private titleService: Title,
-    public toast: ToastComponent
+    public toast: ToastComponent,
   ) { }
 
   ngOnInit() {
@@ -60,13 +61,12 @@ export class DictEditComponent implements OnInit {
 
   cancelEditing() {
     this.isEditing = false;
-    //this.dict = {};
     this.toast.setMessage('item editing cancelled.', 'warning');
-    // reload the dicts to reset the editing
+    // reload the dict to reset the editing
+    this.router.navigate(['/']);
   }
 
   editDict(dict, editState) {
-    console.log('hello');
     this.dataService.editDict(dict).subscribe(
       res => {
         this.isEditing = editState;
@@ -88,12 +88,17 @@ export class DictEditComponent implements OnInit {
         error => console.log(error)
       );
     }
+
+    this.router.navigate(['/']);
   }
 
   deleteRow(e, row) {
-    e.preventDefault();
-    this.dict.dictSchema.splice(row);
-    this.editDict(this.dict, true);
+    // to add cofirmation once done testing
+    if (window.confirm('Are you sure you want to permanently delete this row?')) {
+      e.preventDefault();
+      this.dict.dictSchema.splice(row);
+      this.editDict(this.dict, true);
+    }
   }
 
   addDomainRow(e) {

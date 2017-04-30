@@ -16,21 +16,29 @@
     <div *ngIf="!isLoading">
       <section class="text-center">
         <h1>Current Dictionaries ({{dicts.length}})</h1>
-        <p class="lead text-muted">The application is targeting to mange colors dictionaries assuming that a collection is one column.</p>
+        <p class="lead text-muted">The application is meant to mange colors dictionaries assuming that a collection is one column of colors values.
+        </p>
         <a routerLink="/add" routerLinkActive="active" class="btn btn-primary--alt">
           <i class="fa fa-plus-circle"></i> Add new dictionary
         </a>
       </section>
-      <section *ngIf="dicts.length === 0">
-        <p>There are no dicts in the DB. Add a new Dict below.</p>
+      <section class="text-center mt-4" *ngIf="dicts.length === 0">
+        <p>There are no Dictionaries in the DB Tet. <a routerLink="/add" routerLinkActive="active">Add a new dictionary.</a></p>
       </section>
       <section>
         <div class="container-fluid">
           <div class="row">
-            <article *ngFor="let dict of dicts" class="my-4 dict col-lg-6">
+            <article *ngFor="let dict of dicts" class="my-4 dict col-lg-12">
               <div class="card card-inverse card--dictionary">
                 <div class="card-block">
-                  <h3 class="card-title h1"><a [routerLink]="[ 'dict/', dict._id]" class="text-white"> {{dict.name}}</a></h3>
+                  <h3 class="card-title h1">
+                    <a [routerLink]="[ 'dict/', dict._id]" class="text-white">
+                        {{dict.name}}
+                    </a>
+                  </h3>
+                  <h5 title="matching schema">
+                    <small> → Schema: {{dict.schemaMatching}}</small>
+                  </h5>
                   <p class="card-text">{{dict.description}}</p>
                   <table class="table">
                     <thead>
@@ -48,10 +56,12 @@
                   </table>
                 </div>
               </div>
-              <footer class="card--dictionary__footer">
+              <footer class="card--dictionary__footer clearfix">
+                <button class="btn btn-sm btn-white btn-hover-danger" (click)="deleteDict(dict)"><i class="fa fa-trash text-danger"></i> Delete</button>
+
                 <a class="btn btn-sm btn-white btn-hover-warning" [routerLink]="[ 'edit/', dict._id]"><i class="fa fa-pencil text-warning"></i> Edit</a>
 
-                <button class="btn btn-sm btn-white btn-hover-danger" (click)="deleteDict(dict)"><i class="fa fa-trash text-danger"></i> Delete</button>
+                <a [routerLink]="[ 'dict/', dict._id]" class="btn btn-primary--alt float-right btn-sm">View <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
               </footer>
             </article>
           </div>

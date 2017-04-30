@@ -16,6 +16,22 @@
 
 /***************** buttons *****************/
 
+.btn {
+  cursor: pointer;
+  transition:  all ease 250ms;
+}
+.btn-primary {
+  @extend .bg-g-purple;
+  @extend .px-4;
+  border-radius: 50px;
+  box-shadow: 0 5px  10px 0 rgba(#000, .2);
+  border: 0;
+  &:hover, &:focus, &:active {
+    border: 0;
+    @extend .bg-g-blue;
+  }
+
+}
 .btn-white {
   background-color: $white;
   border: 0;
@@ -23,8 +39,6 @@
   color: rgba(#000, .3);
   @extend .px-4;
   border-radius: 50px;
-  transition:  all ease 250ms;
-  cursor: pointer;
 
   &:hover, &:focus, &:active {
     box-shadow: 0 5px  10px 0 rgba(#000, .2);
@@ -38,8 +52,6 @@
   color: rgba(#000, .3);
   @extend .px-4;
   border-radius: 50px;
-  transition:  all ease 250ms;
-  cursor: pointer;
 
   &:hover, &:focus, &:active {
     box-shadow: 0 5px  10px 0 rgba(#000, .2);
@@ -50,7 +62,6 @@
   &:hover, &:focus, &:active {
     color: $white;
     box-shadow: 0 5px  10px 0 rgba(#000, .2);
-
     @extend .bg-g-pink;
     i {
       color: $white !important;
@@ -62,7 +73,6 @@
   &:hover, &:focus, &:active {
     color: $white;
     box-shadow: 0 5px  10px 0 rgba(#000, .2);
-
     @extend .bg-g-orange;
     i {
       color: $white !important;
@@ -86,9 +96,7 @@
   box-shadow: 0 5px  10px 0 rgba(#000, .2);
   border-radius: 50px;
   background-color: $white;
-  transition:  all ease 250ms;
   @extend .px-4;
-  cursor: pointer;
 
     &:hover, &:focus, &:active {
     box-shadow: 0 5px  10px 0 rgba(#000, .2);
@@ -142,7 +150,6 @@ input[type='text'].form-control{
   color : $gray-light;
   @extend .py-2;
   display: block;
-  transition:  all ease 250ms;
 
   font-size: 14px;
 
@@ -187,7 +194,7 @@ input[type='text'].form-control{
   @extend .px-4;
   @extend .bg-white;
   @extend .mx-auto;
-  @extend .text-right;
+  //@extend .text-right;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   box-shadow: 0 5px  10px 0 rgba(#000, .1);

@@ -74,7 +74,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let domain of dict.dictSchema; let i = index;">
+                      <tr *ngFor="let domain of dict.dictSchema; let i = index;" [class.table-warning]="domain.count === 2">
                         <td>
                           <div class="form-group">
                             <input class="form-control" type="text" name="{{domain.source}}" [(ngModel)]="domain.source" [ngModelOptions]="{standalone: true}"
@@ -98,11 +98,11 @@
                   <button class="btn btn-sm btn-text btn-hover-info" (click)="addDomainRow($event)"><i class="fa fa-plus text-primary"></i> Add domain and range row</button>
                 </div>
               </div>
-              <footer class="card--dictionary__footer">
+              <footer class="card--dictionary__footer clearfix">
                 <button class="btn btn-sm btn-text btn-hover-danger float-left" (click)="deleteDict(dict)"><i class="fa fa-trash text-danger"></i> Delete Dictionary</button>
-                <button class="btn btn-sm  btn-text btn-hover-warning" (click)="cancelEditing()"><i class="fa fa-times text-warning"></i> Cancel</button>
+                <button class="btn btn-sm  btn-text btn-hover-warning float-left" type="reset" (click)="cancelEditing()"><i class="fa fa-times text-warning"></i> Cancel</button>
 
-                <button class="btn btn-sm btn-primary--alt" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o text-primary"></i> Save</button>
+                <button class="btn btn-sm btn-primary float-right" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Save</button>
               </footer>
             </form>
           </div>
