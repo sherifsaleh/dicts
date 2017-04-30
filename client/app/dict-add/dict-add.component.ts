@@ -20,8 +20,9 @@ export class DictAddComponent implements OnInit {
   name = new FormControl('', Validators.required);
   description = new FormControl('', Validators.required);
   dictSchema = new FormControl('', Validators.required);
+  schemaMatching = new FormControl('', Validators.required);
 
-
+  schemas = [];
   schemaCodingLang = [
     {
       'source': 'py',
@@ -56,7 +57,10 @@ export class DictAddComponent implements OnInit {
       name: this.name,
       description: this.description,
       dictSchema: this.dictSchema,
+      schemaMatching: this.schemaMatching,
     });
+
+    this.getSchemas();
 
     this.isLoading = false;
 
@@ -69,6 +73,18 @@ export class DictAddComponent implements OnInit {
         this.dicts.push(newDict);
         this.addDictForm.reset();
         this.toast.setMessage('Dictionary added successfully.', 'success');
+      },
+      error => console.log(error)
+    );
+  }
+
+  getSchemas() {
+    this.dataService.getSchemas().subscribe(
+      res => {
+        const loadedSchemas = res;
+
+        loadedSchemas.map((x) => this.schemas.push(x));
+
       },
       error => console.log(error)
     );

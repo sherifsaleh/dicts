@@ -15,6 +15,9 @@ export class DataService {
   getDicts(): Observable<any> {
     return this.http.get('/api/dicts').map(res => res.json());
   }
+  getSchemas(): Observable<any> {
+    return this.http.get('/api/schemas').map(res => res.json());
+  }
 
   countDicts(): Observable<any> {
     return this.http.get('/api/dicts/count').map(res => res.json());

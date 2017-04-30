@@ -41,7 +41,11 @@ var BaseCtrl = (function () {
             });
         };
         this.getSchemas = function (req, res) {
-            _this.model.find({}, null, { sort: { date: -1 } }, function (err, docs) {
+            // this.model.find({}, 'schemaMatching', { sort: { date: -1 } }, (err, docs) => {
+            //   if (err) { return console.error(err); }
+            //   res.json(docs);
+            // });
+            _this.model.find().distinct('schemaMatching', function (err, docs) {
                 if (err) {
                     return console.error(err);
                 }

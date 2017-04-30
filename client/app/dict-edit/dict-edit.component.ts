@@ -15,13 +15,10 @@ export class DictEditComponent implements OnInit {
 
   dict: any;
   isEditing = true;
+  isLoading = true;
   dicts = [];
 
-  schemas = [
-    { name: 'basic' },
-    { name: 'x11' },
-    { name: 'Ral' }
-  ]
+  schemas = [];
 
 
   constructor(
@@ -43,6 +40,10 @@ export class DictEditComponent implements OnInit {
         this.setTitle(pageTitle);
         return this.dict = dictParse;
       });
+
+    this.getSchemas();
+    this.isLoading = false;
+
   }
   setTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
@@ -99,5 +100,17 @@ export class DictEditComponent implements OnInit {
     e.preventDefault();
     this.dict.dictSchema.push({ 'source': 'new domaine', 'target': 'new new range' });
     this.editDict(this.dict, true);
+  }
+
+  getSchemas() {
+    this.dataService.getSchemas().subscribe(
+      res => {
+        const loadedSchemas = res;
+
+        loadedSchemas.map((x) => this.schemas.push(x));
+
+      },
+      error => console.log(error)
+    );
   }
 }

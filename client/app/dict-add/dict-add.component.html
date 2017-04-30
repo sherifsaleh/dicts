@@ -24,6 +24,15 @@
           <div class="form-group">
             <input class="form-control" type="text" name="description" formControlName="description" placeholder="Description">
           </div>
+
+          <div class="form-group">
+            <label for="schema" title="Match your dictionary's domains to dictionary's ranges">Choose a schema:<sup class="text-muted"><i class="fa fa-info-circle"></i>  Match dictionary's domains to dictionary's ranges.</sup>
+                  </label>
+            <select class="form-control" formControlName="schemaMatching" name="schemaMatching">
+                  <option *ngFor="let schema of schemas" [value]="schema">{{schema}}</option>
+                </select>
+          </div>
+
           <div class="form-group">
             <textarea class="form-control" rows="3" formControlName="dictSchema" name="dictSchema" placeholder="Colors: stone gray, red, yellow ...   so on"></textarea>
           </div>

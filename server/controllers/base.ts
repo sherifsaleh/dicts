@@ -36,7 +36,12 @@ abstract class BaseCtrl {
   };
 
   getSchemas = (req, res) => {
-    this.model.find({}, null, { sort: { date: -1 } }, (err, docs) => {
+    // this.model.find({}, 'schemaMatching', { sort: { date: -1 } }, (err, docs) => {
+    //   if (err) { return console.error(err); }
+    //   res.json(docs);
+    // });
+
+    this.model.find().distinct('schemaMatching', (err, docs) => {
       if (err) { return console.error(err); }
       res.json(docs);
     });
