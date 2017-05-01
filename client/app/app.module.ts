@@ -9,7 +9,6 @@ import { DataService } from './services/data.service';
 import { DictDetailsComponent } from './dict-details/dict-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DictAddComponent } from './dict-add/dict-add.component';
-import { DictEditComponent } from './dict-edit/dict-edit.component';
 
 
 @NgModule({
@@ -18,9 +17,8 @@ import { DictEditComponent } from './dict-edit/dict-edit.component';
     HomeComponent,
     AboutComponent,
     DictDetailsComponent,
-    PageNotFoundComponent,
     DictAddComponent,
-    DictEditComponent
+    PageNotFoundComponent
   ],
   imports: [
     AppRoutingModule,

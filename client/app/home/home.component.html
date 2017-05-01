@@ -59,7 +59,7 @@
               <footer class="card--dictionary__footer clearfix">
                 <button class="btn btn-sm btn-white btn-hover-danger" (click)="deleteDict(dict)"><i class="fa fa-trash text-danger"></i> Delete</button>
 
-                <a class="btn btn-sm btn-white btn-hover-warning" [routerLink]="[ 'edit/', dict._id]"><i class="fa fa-pencil text-warning"></i> Edit</a>
+                <a class="btn btn-sm btn-white btn-hover-warning" [routerLink]="[ 'dict/', dict._id]" [queryParams]="{ edit: true }"><i class="fa fa-pencil text-warning"></i> Edit</a>
 
                 <a [routerLink]="[ 'dict/', dict._id]" class="btn btn-primary--alt float-right btn-sm">View <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
               </footer>

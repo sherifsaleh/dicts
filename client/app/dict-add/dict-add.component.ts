@@ -103,7 +103,7 @@ export class DictAddComponent implements OnInit {
         this.dicts.push(newDict);
         this.addDictForm.reset();
         this.toast.setMessage('Dictionary added successfully. Please complete the following...', 'success');
-        this.router.navigate(['/edit', newDict._id]);
+        this.router.navigate(['/dict', newDict._id], { queryParams: { edit: true } });
       },
       error => console.log(error)
     );
@@ -133,7 +133,6 @@ export class DictAddComponent implements OnInit {
     if (dictNew.schemaMatching === 'Other') { dictNew.schemaMatching = dictNew.name };
 
     dictNew.dictSchema = this.dictNewSchema;
-    console.log(dictNew.schemaMatching);
 
     this.addDict(dictNew);
   }
@@ -155,7 +154,7 @@ export class DictAddComponent implements OnInit {
     let build = data.map((key) => {
       this.schemaCodingLang.filter((x, index) => {
         if (key == x.source) {
-          keys.push({ 'count': 1, 'state': 'match', 'source': key, 'target': x.target });
+          keys.push({ 'count': 1, 'state': 'match', 'source': key, 'sourceCount': 1, 'target': x.target });
         }
       })
     });
