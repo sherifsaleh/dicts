@@ -4,10 +4,76 @@
       <h1>About</h1>
       <p class="lead">
         This is a proto-project for dictionaries for a demo it only handle colors submited in html form and comma seperated.
-        <code>ello</code>
+        <br>
+        <small>
+          <code>RAL : Strawberry red, Slate grey, Anthracite grey... </code>
+          <code>X11 : MidnightBlue, SlateGray, SaddleBrown... </code> <br>
+        </small>
       </p>
-      <a href="https://colors-dicts.herokuapp.com/">Hosted on herokuapp.</a>
-      <a href="https://github.com/sherifsaleh/dicts">On github.</a>
+      <a href="https://colors-dicts.herokuapp.com/" class="btn btn-danger">Hosted on heroku.</a>
+      <a href="https://github.com/sherifsaleh/dicts" class="btn btn-primary--alt"><i class="fa fa-github" aria-hidden="true"></i>
+On github.</a>
+
+      <section class="text-left mt-5 card">
+        <div class="card-block">
+          <h4 class="card-title">Functionalities and the application logic :</h4>
+          <ul>
+            <li>Express used to generate RESTFUL API :
+              <ul>
+                <li>
+                  <a href="https://colors-dicts.herokuapp.com/api/dicts" target="_blank">/api/dicts</a>
+                </li>
+                <li>
+                  <a href="https://colors-dicts.herokuapp.com/api/dict/590747672a0cf608388359a7" target="_blank">/api/dict/:id</a>
+                </li>
+                <li><a href="https://colors-dicts.herokuapp.com/api/schemas" target="_blank">/api/schemas</a></li>
+                <li><a href="https://colors-dicts.herokuapp.com/api/schemas/names" target="_blank">/api/schemas/names</a></li>
+              </ul>
+            </li>
+            <li>CRUD operations of colors dictionaries</li>
+            <li>CRUD of each dictionary row values</li>
+            <li>Schema matching to x11, RAL or create new schema</li>
+            <li>On Add function validation of duplicates, match to the choosed schema, save to db and highlight row if there
+              is any problem</li>
+            <li>Use all new schemas beside x11, RAL to standardize your inputs values to the schema choosed</li>
+            <li>Feedback message on user action</li>
+            <li>Quick styling for the app with bootstrap</li>
+            <li>
+              x11, RAL is only a starting point can be removed.
+            </li>
+            <li>
+              There is still some room for improvement and testing.
+            </li>
+          </ul>
+        </div>
+
+      </section>
+      <section class="text-left mt-5 card">
+        <div class="card-block">
+          <h4>Stack :</h4>
+          <ul>
+            <li>Mongoose.js (MongoDB): database and mLab for heroku</li>
+            <li>Express.js: backend framework</li>
+            <li>Angular 4: frontend framework</li>
+            <li>TypeScript</li>
+            <li>Node.js: runtime environment</li>
+            <li>Angular CLI: project scaffolding</li>
+            <li>Bootstrap: layout and styles</li>
+            <li>Font Awesome: icons</li>
+          </ul>
+        </div>
+
+      </section>
+      <section class="text-left mt-5 card">
+        <div class="card-block">
+          <h4>Colors :</h4>
+          <p>colors used for this demo. or you can create your own</p>
+          <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Web_colors#X11_color_names">X11</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/List_of_RAL_colors">RAL</a></li>
+          </ul>
+        </div>
+      </section>
     </div>
   </div>
 </div>

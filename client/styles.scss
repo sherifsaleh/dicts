@@ -69,6 +69,21 @@
   }
 }
 
+.btn-danger {
+@extend .bg-g-pink;
+border-radius: 50px;
+border:0;
+box-shadow: 0 5px  10px 0 rgba(#000, .2);
+
+&:hover, &:focus, &:active {
+  color: $white;
+  @extend .bg-g-red;
+  i {
+    color: $white !important;
+  }
+}
+
+}
 .btn-hover-warning {
   &:hover, &:focus, &:active {
     color: $white;
