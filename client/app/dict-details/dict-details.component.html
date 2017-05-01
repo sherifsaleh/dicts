@@ -12,7 +12,7 @@
   <div *ngIf="dict;else nodict" class=" my-4">
     <article *ngIf="!isEditing">
       <header class="text-center my-4">
-        <h1>{{dict.name}} <sup class="text-sucess small-sup" *ngIf="dict.validation != false">
+        <h1>{{dict.name}} <sup class="small-sup" *ngIf="dict.validation != false">
         <i class="fa fa-check text-success" aria-hidden="true"></i></sup></h1>
 
         <p class="lead">{{dict.description}}</p>
@@ -57,20 +57,20 @@
                 <div class="form-group">
                   <label for="name" class="col-form-label-lg">Dictionary Title: </label>
                   <input class="form-control form-control-lg" type="text" name="name" [(ngModel)]="dict.name" placeholder="Name" required>
+                  <small class="mt-3">Schema : {{dict.schemaMatching}}</small>
                 </div>
                 <div class="form-group">
                   <label for="description">Dictionary Description: </label>
                   <textarea class="form-control" rows="3" name="description" [(ngModel)]="dict.description" placeholder="Description" required></textarea>
                 </div>
 
-                <div class="form-group">
+                <!--<div class="form-group">
                   <label for="schema" title="Match your dictionary's domains to dictionary's ranges">Choose a schema:<sup class="text-muted"><i class="fa fa-info-circle"></i>  Match dictionary's domains to dictionary's ranges.</sup>
                   </label>
-                  <!--formControlName="schemaMatching" name="schemaMatching" [(ngModel)]="dict.schemaMatching"-->
                   <select class="form-control" [(ngModel)]="dict.schemaMatching" name="schemaMatching">
                   <option *ngFor="let schema of schemas"  [value]="schema" [attr.selected]="dict.schemaMatching == schema ? true : null" >{{schema}}</option>
                 </select>
-                </div>
+                </div>-->
               </header>
               <div class="card  card--dictionary">
                 <div class="card-block">

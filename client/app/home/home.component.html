@@ -33,7 +33,8 @@
                 <div class="card-block">
                   <h3 class="card-title h1">
                     <a [routerLink]="[ 'dict/', dict._id]" class="text-white">
-                        {{dict.name}}
+                        {{dict.name}} <sup class="small-sup" *ngIf="dict.validation != false">
+                        <i class="fa fa-check text-white" aria-hidden="true"></i></sup>
                     </a>
                   </h3>
                   <h5 title="matching schema">
