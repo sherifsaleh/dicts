@@ -48,7 +48,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let domain of dict.dictSchema">
+                      <tr *ngFor="let domain of dict.dictSchema  | slice:0:3; let i=index">
                         <td>{{domain.source}}</td>
                         <td>{{domain.target}}</td>
                       </tr>

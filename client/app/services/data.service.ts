@@ -16,7 +16,14 @@ export class DataService {
     return this.http.get('/api/dicts').map(res => res.json());
   }
   getSchemas(): Observable<any> {
-    return this.http.get('/api/schemas').map(res => res.json());
+    return this.http.get('/api/dicts').map(res => res.json());
+  }
+  getSchemasNames(): Observable<any> {
+    return this.http.get('/api/schemas/names').map(res => res.json());
+  }
+
+  getSchemaByName(schemaId): Observable<any> {
+    return this.http.get(`api/schemas/${schemaId}`).map(res => res.json());
   }
 
   countDicts(): Observable<any> {

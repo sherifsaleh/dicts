@@ -35,13 +35,21 @@ abstract class BaseCtrl {
     });
   };
 
-  getSchemas = (req, res) => {
+  getSchemasNames = (req, res) => {
     // this.model.find({}, 'schemaMatching', { sort: { date: -1 } }, (err, docs) => {
     //   if (err) { return console.error(err); }
     //   res.json(docs);
     // });
 
     this.model.find().distinct('schemaMatching', (err, docs) => {
+      if (err) { return console.error(err); }
+      res.json(docs);
+    });
+  };
+
+  getSchemas = (req, res) => {
+
+    this.model.find({}, 'dictSchema', { sort: { date: -1 } }, (err, docs) => {
       if (err) { return console.error(err); }
       res.json(docs);
     });

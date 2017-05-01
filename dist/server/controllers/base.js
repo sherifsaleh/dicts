@@ -40,12 +40,20 @@ var BaseCtrl = (function () {
                 res.json(obj);
             });
         };
-        this.getSchemas = function (req, res) {
+        this.getSchemasNames = function (req, res) {
             // this.model.find({}, 'schemaMatching', { sort: { date: -1 } }, (err, docs) => {
             //   if (err) { return console.error(err); }
             //   res.json(docs);
             // });
             _this.model.find().distinct('schemaMatching', function (err, docs) {
+                if (err) {
+                    return console.error(err);
+                }
+                res.json(docs);
+            });
+        };
+        this.getSchemas = function (req, res) {
+            _this.model.find({}, 'dictSchema', { sort: { date: -1 } }, function (err, docs) {
                 if (err) {
                     return console.error(err);
                 }

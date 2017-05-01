@@ -7,6 +7,7 @@ var dictSchema = new mongoose.Schema({
     dictSchema: [],
     schemaMatching: String,
     state: String,
+    validation: Boolean,
     date: { type: Date, default: Date.now }
 });
 var Dict = mongoose.model('Dict', dictSchema);

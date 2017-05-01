@@ -47,7 +47,7 @@ export class DictDetailsComponent implements OnInit {
         this.isEditing = params['edit'] || false;
       });
 
-    this.getSchemas();
+    this.getSchemasNames();
     this.isLoading = false;
 
   }
@@ -71,7 +71,7 @@ export class DictDetailsComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  editDict(dict, editState) {
+  editDict(dict, editState, message, messageType) {
 
     let dictState = this.dictState(dict.dictSchema);
 
@@ -82,7 +82,7 @@ export class DictDetailsComponent implements OnInit {
         this.isEditing = editState;
         this.dict = dict;
 
-        this.toast.setMessage('Dictionary edited successfully.', 'success');
+        this.toast.setMessage(message, messageType);
       },
       error => console.log(error)
     );
@@ -108,18 +108,18 @@ export class DictDetailsComponent implements OnInit {
     if (window.confirm('Are you sure you want to permanently delete this row?')) {
       e.preventDefault();
       this.dict.dictSchema.splice(row);
-      this.editDict(this.dict, true);
+      this.editDict(this.dict, true, 'row has been removed', 'danger');
     }
   }
 
   addDomainRow(e) {
     e.preventDefault();
     this.dict.dictSchema.push({ 'source': 'new domain', 'sourceCount': 1, 'target': 'new range', 'state': 'added', 'count': 1 });
-    this.editDict(this.dict, true);
+    this.editDict(this.dict, true, 'row has been added', 'info');
   }
 
-  getSchemas() {
-    this.dataService.getSchemas().subscribe(
+  getSchemasNames() {
+    this.dataService.getSchemasNames().subscribe(
       res => {
         const loadedSchemas = res;
 
@@ -205,8 +205,18 @@ export class DictDetailsComponent implements OnInit {
       });
       return x
     });
-
-    console.log(sourceReadyKeys);
     return sourceReadyKeys;
   }
+
+  validate() {
+    let fetchState = this.dictState(this.dict.dictSchema).filter(x => x.sourceCount > 1);
+    console.log(fetchState.length);
+
+    if (fetchState.length == 0) {
+      this.dict.validation = true;
+      this.editDict(this.dict, false, 'dictionary has been vaildated', 'success');
+    } else {
+      this.toast.setMessage('Domain column still has duplication.', 'danger');
+    }
+  };
 }

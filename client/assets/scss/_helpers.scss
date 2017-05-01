@@ -15,6 +15,16 @@
 .bg-g-orange {
   @include gradient($orange, $yellow);
 }
+
+.bg-g-green {
+  @include gradient($green,  lighten($green, 20%)) ;
+}
 .bg-white {
   background-color: #fff;
+}
+
+.small-sup {
+  font-size: 12px;
+  line-height: 1;
+  top: -20px;
 }

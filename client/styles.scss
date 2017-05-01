@@ -108,6 +108,24 @@
       }
   }
 }
+
+
+.btn-success--alt {
+  box-shadow: 0 5px  10px 0 rgba(#000, .2);
+  border-radius: 50px;
+  background-color: $white;
+  @extend .px-4;
+
+    &:hover, &:focus, &:active {
+    box-shadow: 0 5px  10px 0 rgba(#000, .2);
+    border-color: transparent;
+      color: $white;
+      @extend .bg-g-green;
+      i {
+        color: $white !important;
+      }
+  }
+}
 /***************** forms *****************/
 .form-control {
   @extend .px-4;
