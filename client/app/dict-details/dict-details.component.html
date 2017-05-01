@@ -84,13 +84,13 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let domain of dict.dictSchema; let i = index;">
-                        <td [class.table-danger]="domain.sourceCount > 1">
+                        <td [class.table-danger]="domain.sourceCount > 1" [class.table-danger]="domain.source == ''">
                           <div class="form-group">
                             <input class="form-control" type="text" name="{{domain.source}}" [(ngModel)]="domain.source" [ngModelOptions]="{standalone: true}"
                               required>
                           </div>
                         </td>
-                        <td [class.table-warning]="domain.count > 1">
+                        <td [class.table-warning]="domain.count > 1" [class.table-danger]="domain.target == ''">
                           <div class="form-group">
                             <input class="form-control" type="text" name="{{domain.target}}" [(ngModel)]="domain.target" [ngModelOptions]="{standalone: true}"
                               required>

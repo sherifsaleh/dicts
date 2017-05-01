@@ -73,3 +73,7 @@ To get more help about this project, [visit the wiki](https://github.com/DavideV
 
 ### Author
 * [Davide Violante](https://github.com/DavideViolante)
+
+### List of Colors used :
+* [X11](https://en.wikipedia.org/wiki/Web_colors#X11_color_names)
+* [RAL](https://en.wikipedia.org/wiki/List_of_RAL_colors)
