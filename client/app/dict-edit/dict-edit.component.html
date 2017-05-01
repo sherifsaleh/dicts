@@ -74,7 +74,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let domain of dict.dictSchema; let i = index;" [class.table-warning]="domain.count === 2">
+                      <tr *ngFor="let domain of dict.dictSchema; let i = index;" [class.table-warning]="domain.count > 1">
                         <td>
                           <div class="form-group">
                             <input class="form-control" type="text" name="{{domain.source}}" [(ngModel)]="domain.source" [ngModelOptions]="{standalone: true}"

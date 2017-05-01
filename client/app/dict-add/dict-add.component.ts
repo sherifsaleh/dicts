@@ -159,23 +159,35 @@ export class DictAddComponent implements OnInit {
         }
       })
     });
-
+    // detect duplicates
     let countedKeys = keys
       .reduce((a, b) => {
         a[b.target] = (a[b.target] || 0) + b.count;
         return a
       }, []);
 
+    // map the detected duplicates
+    let duplicatesValues = Object.keys(countedKeys).map((a) => {
+      if (countedKeys[a] > 1) {
+        return { 'target': a, 'count': countedKeys[a] }
+      }
+      return false;
+    });
 
-    let duplicatesValues = Object.keys(countedKeys).filter((a) => countedKeys[a] > 1);
+    // assign duplicats count to final array added to db
     let readyKeys = keys.map((x) => {
       duplicatesValues.filter((repatedName) => {
-        if (x.target === repatedName) {
-          x.count = 2; return x;
+        if (repatedName != false) {
+          if (x.target === repatedName.target) {
+            x.count = repatedName.count
+            return x
+          }
         }
       });
       return x
     });
+
+
 
     this.dictNewSchema = readyKeys;
   }
