@@ -67,10 +67,15 @@ export class DictEditComponent implements OnInit {
   }
 
   editDict(dict, editState) {
+
+    let dictState = this.dictState(dict.dictSchema);
+    dict.dictSchema = dictState;
+
     this.dataService.editDict(dict).subscribe(
       res => {
         this.isEditing = editState;
         this.dict = dict;
+
         this.toast.setMessage('Dictionary edited successfully.', 'success');
       },
       error => console.log(error)
@@ -103,7 +108,7 @@ export class DictEditComponent implements OnInit {
 
   addDomainRow(e) {
     e.preventDefault();
-    this.dict.dictSchema.push({ 'source': 'new domaine', 'target': 'new new range' });
+    this.dict.dictSchema.push({ 'source': 'new domaine', 'target': 'new new range', 'state': 'added', 'count': 1 });
     this.editDict(this.dict, true);
   }
 
@@ -117,5 +122,53 @@ export class DictEditComponent implements OnInit {
       },
       error => console.log(error)
     );
+  }
+
+
+  dictState(data) {
+    let keys = data.map((key) => {
+      // rest count to 1
+      return {
+        "target": key.target,
+        "source": key.source,
+        "state": key.state,
+        "count": 1
+      }
+    });
+
+
+
+    //console.log(keys);
+    // detect duplicates changes
+    let countedKeys = keys
+      .reduce((a, b) => {
+        a[b.target] = (a[b.target] || 0) + b.count;
+        return a
+      }, []);
+
+
+
+    //map the detected duplicates
+    let duplicatesValues = Object.keys(countedKeys).map((a) => {
+      if (countedKeys[a] > 1) {
+        return { 'target': a, 'count': countedKeys[a] }
+      }
+      return false;
+    });
+
+    // assign duplicats count to final array added to db
+    let readyKeys = keys.map((x) => {
+      duplicatesValues.filter((repatedName) => {
+        if (repatedName != false) {
+          if (x.target === repatedName.target) {
+            x.count = repatedName.count
+            return x
+          }
+        }
+      });
+      return x
+    });
+
+    return readyKeys;
   }
 }

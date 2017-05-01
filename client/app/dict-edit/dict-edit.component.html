@@ -14,7 +14,7 @@
       <header class="text-center my-4">
         <h1> {{dict.name}}</h1>
         <p class="lead">{{dict.description}}</p>
-        <button (click)="goBack()" class="btn btn-primary--alt"><i class="fa fa-home"></i> home</button>
+        <button (click)="goBack()" class="btn btn-primary--alt"><i class="fa fa-home text-primary"></i> home</button>
       </header>
       <div class="card card--dictionary">
         <div class="card-block">
@@ -34,9 +34,13 @@
           </table>
         </div>
       </div>
-      <footer class="card--dictionary__footer">
-        <button class="btn btn-sm btn-white btn-hover-warning" (click)="enableEditing(dict)"><i class="fa fa-pencil text-warning"></i> Edit</button>
-        <button class="btn btn-sm btn-white btn-hover-danger" (click)="deleteDict(dict)"><i class="fa fa-trash text-danger"></i> Delete</button>
+      <footer class="card--dictionary__footer clearfix">
+        <button class="btn btn-sm btn-white btn-hover-danger float-left" (click)="deleteDict(dict)"><i class="fa fa-trash text-danger"></i> Delete</button>
+        <button class="btn btn-sm btn-white btn-hover-warning float-left" (click)="enableEditing(dict)"><i class="fa fa-pencil text-warning"></i> Edit</button>
+
+        <a class="btn btn-sm btn-primary--alt float-right" routerLink="/"><i class="fa fa-check text-primary"></i> Done</a>
+
+
       </footer>
     </article>
     <section *ngIf="isEditing">
