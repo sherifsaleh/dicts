@@ -145,7 +145,7 @@ export class DictAddComponent implements OnInit {
             dictNew.schemaMatching = dictNew.name;
             let dictNewSchema = []
             let newSchema = proceeded.map((x) => {
-                dictNewSchema.push({ 'count': 1, 'state': 'match', 'source': x, 'sourceCount': 1, 'target': '' });
+                dictNewSchema.push({ 'count': 1, 'state': 'nomatch', 'source': x, 'sourceCount': 1, 'target': '' });
             })
 
             dictNew.dictSchema = dictNewSchema;
@@ -172,7 +172,7 @@ export class DictAddComponent implements OnInit {
         // trim remove all space, dashes, convert to lowercases, spilt with comma
         let trimed = data.trim().replace(/(\r\n|\n|\r|\s|-)/gm, '').toLowerCase().split('\,').filter((x) => x != '');
         // remove duplicates
-        let uniqueArray = trimed.filter(function(item, pos) {
+        let uniqueArray = trimed.filter(function (item, pos) {
             return trimed.indexOf(item) == pos;
         });
 
@@ -217,8 +217,15 @@ export class DictAddComponent implements OnInit {
             });
             return x
         });
+        // get un matched
+        let matchKeysArray = matchKeys.map(x => x.source);
+        let unmatchKeys = data.filter(x => matchKeysArray.indexOf(x) < 0).map(x => {
+            return { 'count': 1, 'state': 'nomatch', 'source': x, 'sourceCount': 1, 'target': '' };
+        });
 
-        this.dictNewSchema = matchKeys;
+        let allKeys = matchKeys.concat(unmatchKeys);
+
+        this.dictNewSchema = allKeys;
     }
 
     setTitle(newTitle: string) {
